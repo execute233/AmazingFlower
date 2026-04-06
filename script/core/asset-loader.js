@@ -22,6 +22,9 @@ export class AssetLoader {
       await image.decode();
       return image;
     } catch {
+      if (image.complete && image.naturalHeight > 0) {
+        return image;
+      }
       await new Promise((resolve, reject) => {
         image.addEventListener('load', resolve, { once: true });
         image.addEventListener('error', () => reject(new Error(`资源加载失败: ${url}`)), {
