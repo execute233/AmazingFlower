@@ -141,6 +141,13 @@ export class PressedFlowerStudio {
   }
 
   /**
+   * 销毁编辑器，释放资源
+   */
+  destroy() {
+    this.#destroy();
+  }
+
+  /**
    * 添加素材到画布
    * @param {Object} asset - 素材对象
    * @param {Object} options - 选项
@@ -771,5 +778,12 @@ export class PressedFlowerStudio {
 
   #findNodeById(nodeId) {
     return this.#compositionGroup.getChildren().find((node) => node.id() === nodeId) ?? null;
+  }
+
+  #destroy() {
+    this.#resizeObserver?.disconnect();
+    this.#resizeObserver = null;
+    this.#stage?.destroy();
+    this.#stage = null;
   }
 }
