@@ -106,6 +106,31 @@
       "zh-Hant": "複製",
       "en": "Duplicate"
     },
+    "toolbar.crop": {
+      "zh-Hans": "裁剪",
+      "zh-Hant": "裁剪",
+      "en": "Crop"
+    },
+    "toolbar.cropApply": {
+      "zh-Hans": "完成裁剪",
+      "zh-Hant": "完成裁剪",
+      "en": "Apply Crop"
+    },
+    "toolbar.cropReset": {
+      "zh-Hans": "重设裁剪",
+      "zh-Hant": "重設裁剪",
+      "en": "Reset Crop"
+    },
+    "toolbar.cropCancel": {
+      "zh-Hans": "取消裁剪",
+      "zh-Hant": "取消裁剪",
+      "en": "Cancel Crop"
+    },
+    "toolbar.resetRotation": {
+      "zh-Hans": "重设旋转",
+      "zh-Hant": "重設旋轉",
+      "en": "Reset Rotation"
+    },
     "toolbar.rotateLeft": {
       "zh-Hans": "左转 15°",
       "zh-Hant": "左轉 15°",
@@ -151,6 +176,16 @@
       "zh-Hant": "{label} · {rotation}°",
       "en": "{label} · {rotation}°"
     },
+    "toolbar.selectionCropping": {
+      "zh-Hans": "{label} · {rotation}° · 裁剪中",
+      "zh-Hant": "{label} · {rotation}° · 裁剪中",
+      "en": "{label} · {rotation}° · Cropping"
+    },
+    "confirm.clearCanvas": {
+      "zh-Hans": "确认清空当前画布中的所有素材吗？此操作不可撤销。",
+      "zh-Hant": "確認清空目前畫布中的所有素材嗎？此操作不可復原。",
+      "en": "Clear all assets from the canvas? This action cannot be undone."
+    },
     "layer.empty": {
       "zh-Hans": "暂无图层",
       "zh-Hant": "暫無圖層",
@@ -167,9 +202,14 @@
       "en": "Loading background and catalog data..."
     },
     "status.initialHint": {
-      "zh-Hans": "拖拽素材到画布，或直接点击素材卡片。",
-      "zh-Hant": "拖曳素材到畫布，或直接點擊素材卡片。",
-      "en": "Drag an asset onto the canvas or click a card to add it."
+      "zh-Hans": "拖拽素材到画布，或直接点击素材卡片；选中后可缩放、旋转和裁剪。",
+      "zh-Hant": "拖曳素材到畫布，或直接點擊素材卡片；選取後可縮放、旋轉和裁剪。",
+      "en": "Drag an asset onto the canvas or click a card to add it, then scale, rotate, and crop it."
+    },
+    "status.backgroundLoaded": {
+      "zh-Hans": "工作台背景已加载完成。",
+      "zh-Hant": "工作台背景已載入完成。",
+      "en": "Workbench background loaded."
     },
     "status.assetsReady": {
       "zh-Hans": "素材库已就绪。可点击文件夹懒加载素材，也可拖入画布。",
@@ -215,6 +255,31 @@
       "zh-Hans": "旋转至 {rotation}°",
       "zh-Hant": "旋轉至 {rotation}°",
       "en": "Rotated to {rotation}°"
+    },
+    "status.rotationReset": {
+      "zh-Hans": "已将 {label} 的旋转角度重设为 0°。",
+      "zh-Hant": "已將 {label} 的旋轉角度重設為 0°。",
+      "en": "Reset the rotation of {label} to 0°."
+    },
+    "status.cropStarted": {
+      "zh-Hans": "开始裁剪 {label}。拖动边角调整，或拖动画框平移保留区域；按 Enter 确认，按 Esc 取消。",
+      "zh-Hant": "開始裁剪 {label}。拖動邊角調整，或拖動畫框平移保留區域；按 Enter 確認，按 Esc 取消。",
+      "en": "Cropping {label}. Drag edges or corners, or drag the crop box to pan the kept area. Press Enter to apply or Esc to cancel."
+    },
+    "status.cropResetPreview": {
+      "zh-Hans": "已将 {label} 恢复为未裁剪预览，点击“完成裁剪”保存，或点“取消裁剪”撤销。",
+      "zh-Hant": "已將 {label} 恢復為未裁剪預覽，點擊「完成裁剪」儲存，或點「取消裁剪」撤銷。",
+      "en": "Restored {label} to an uncropped preview. Apply Crop to save or Cancel Crop to undo."
+    },
+    "status.cropApplied": {
+      "zh-Hans": "已更新 {label} 的裁剪区域。",
+      "zh-Hant": "已更新 {label} 的裁剪區域。",
+      "en": "Updated the crop for {label}."
+    },
+    "status.cropCancelled": {
+      "zh-Hans": "已取消 {label} 的裁剪。",
+      "zh-Hant": "已取消 {label} 的裁剪。",
+      "en": "Cancelled cropping for {label}."
     },
     "status.canvasCleared": {
       "zh-Hans": "画布已清空。",

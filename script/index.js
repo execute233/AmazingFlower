@@ -190,6 +190,24 @@ function bindKeyboardShortcuts(studio) {
             return;
         }
 
+        if (studio.isCropModeActive()) {
+            switch (event.key) {
+                case 'Enter':
+                    if (studio.commitCropSelection()) {
+                        event.preventDefault();
+                    }
+                    break;
+                case 'Escape':
+                    if (studio.cancelCropSelection()) {
+                        event.preventDefault();
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
+
         const primaryModifier = event.ctrlKey || event.metaKey;
         const nudgeStep = event.shiftKey ? 24 : 12;
 
@@ -284,7 +302,9 @@ async function main() {
         onSelectionChange: (selectionState) => {
             updateToolbarState(toolbarNode, selectionState, {
                 emptyLabel: i18n.t('toolbar.selectionNone'),
-                formatSelection: ({ label, rotation }) => i18n.t('toolbar.selectionSummary', { label, rotation }),
+                formatSelection: ({ label, rotation, isCropping }) => (isCropping
+                    ? i18n.t('toolbar.selectionCropping', { label, rotation })
+                    : i18n.t('toolbar.selectionSummary', { label, rotation })),
             });
         },
         // 图层变化时的回调 - 重新渲染图层列表
@@ -392,16 +412,29 @@ async function main() {
             duplicate: () => {
                 studio.duplicateSelection(); // 复制选中素材
             },
-            'rotate-left': () => {
-                studio.rotateSelection(-15); // 左转 15 度
+            crop: () => {
+                studio.startCropSelection(); // 进入裁剪模式
             },
-            'rotate-right': () => {
-                studio.rotateSelection(15); // 右转 15 度
+            'crop-apply': () => {
+                studio.commitCropSelection(); // 确认裁剪
+            },
+            'crop-reset': () => {
+                studio.resetCropSelection(); // 预览恢复完整裁剪范围
+            },
+            'crop-cancel': () => {
+                studio.cancelCropSelection(); // 取消裁剪
+            },
+            'reset-rotation': () => {
+                studio.resetSelectionRotation(); // 重设为 0 度
             },
             remove: () => {
                 studio.removeSelection(); // 移除选中素材
             },
             'clear-canvas': () => {
+                if (!window.confirm(i18n.t('confirm.clearCanvas'))) {
+                    return;
+                }
+
                 studio.clearComposition(); // 清空画布
             },
             // 文件操作

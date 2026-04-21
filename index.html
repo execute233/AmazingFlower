@@ -64,21 +64,26 @@
             </div>
 
             <div class="toolbar" data-toolbar>
-                <div class="toolbar__group">
+                <div class="toolbar__group toolbar__group--selection" data-toolbar-group="selection" hidden>
                     <button type="button" data-action="move-up" data-requires-selection="true" data-i18n="toolbar.moveUp">上移</button>
                     <button type="button" data-action="move-down" data-requires-selection="true" data-i18n="toolbar.moveDown">下移</button>
                     <button type="button" data-action="duplicate" data-requires-selection="true" data-i18n="toolbar.duplicate">复制</button>
-                    <button type="button" data-action="rotate-left" data-requires-selection="true" data-i18n="toolbar.rotateLeft">左转 15°</button>
-                    <button type="button" data-action="rotate-right" data-requires-selection="true" data-i18n="toolbar.rotateRight">右转 15°</button>
+                    <button type="button" data-action="crop" data-requires-selection="true" data-i18n="toolbar.crop">裁剪</button>
+                    <button type="button" data-action="reset-rotation" data-requires-selection="true" data-i18n="toolbar.resetRotation">重设旋转</button>
                     <button type="button" data-action="remove" data-requires-selection="true" data-i18n="toolbar.remove">移除</button>
                 </div>
-                <div class="toolbar__group toolbar__group--file">
+                <div class="toolbar__group toolbar__group--crop" data-toolbar-group="crop" hidden>
+                    <button type="button" class="toolbar__accent" data-action="crop-apply" data-requires-selection="true" data-i18n="toolbar.cropApply">完成裁剪</button>
+                    <button type="button" data-action="crop-reset" data-requires-selection="true" data-i18n="toolbar.cropReset">重设裁剪</button>
+                    <button type="button" class="toolbar__ghost" data-action="crop-cancel" data-requires-selection="true" data-i18n="toolbar.cropCancel">取消裁剪</button>
+                </div>
+                <div class="toolbar__group toolbar__group--system" data-toolbar-group="system">
                     <button type="button" class="toolbar__ghost" data-action="import-json" data-i18n="toolbar.importJson">导入方案</button>
                     <button type="button" class="toolbar__ghost" data-action="export-json" data-i18n="toolbar.exportJson">导出方案</button>
                     <button type="button" class="toolbar__ghost" data-action="export-image" data-i18n="toolbar.exportImage">导出书签图</button>
-                </div>
-                <div class="toolbar__group toolbar__group--meta">
                     <button type="button" class="toolbar__ghost" data-action="clear-canvas" data-i18n="toolbar.clearCanvas">清空画布</button>
+                </div>
+                <div class="toolbar__meta" data-toolbar-meta hidden>
                     <output class="toolbar__selection" data-selection-label data-i18n="toolbar.selectionNone">未选中素材</output>
                 </div>
             </div>
