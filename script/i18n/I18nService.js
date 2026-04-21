@@ -18,6 +18,49 @@ async function fetchJson(url) {
   return response.json();
 }
 
+function createMessageStore(base = {}) {
+  return {
+    defaultLocale: base.defaultLocale ?? 'zh-Hans',
+    supportedLocales: Array.isArray(base.supportedLocales) && base.supportedLocales.length
+      ? [...base.supportedLocales]
+      : ['zh-Hans', 'zh-Hant', 'en'],
+    ui: { ...(base.ui ?? {}) },
+    labels: { ...(base.labels ?? {}) },
+  };
+}
+
+function mergeMessages(base, patch) {
+  return {
+    ...base,
+    defaultLocale: patch.defaultLocale ?? base.defaultLocale,
+    supportedLocales: Array.isArray(patch.supportedLocales) && patch.supportedLocales.length
+      ? [...patch.supportedLocales]
+      : base.supportedLocales,
+    ui: {
+      ...base.ui,
+      ...(patch.ui ?? {}),
+    },
+    labels: {
+      ...base.labels,
+      ...(patch.labels ?? {}),
+    },
+  };
+}
+
+async function loadMessages(url) {
+  const root = await fetchJson(url);
+  if (!Array.isArray(root?.resources) || !root.resources.length) {
+    return createMessageStore(root);
+  }
+
+  const store = createMessageStore(root);
+  const resources = await Promise.all(
+    root.resources.map((resource) => fetchJson(new URL(resource, url).href)),
+  );
+
+  return resources.reduce((messages, resource) => mergeMessages(messages, resource), store);
+}
+
 const LOCALE_LANG = Object.freeze({
   'zh-Hans': 'zh-CN',
   'zh-Hant': 'zh-HK',
@@ -51,6 +94,30 @@ function resolveBrowserLocale(supportedLocales) {
   return supportedLocales[0] ?? 'zh-Hans';
 }
 
+function resolveRecord(collection, key, visited = new Set()) {
+  if (!collection || typeof collection !== 'object') {
+    return null;
+  }
+
+  const record = collection[key];
+  if (!record || typeof record !== 'object' || Array.isArray(record)) {
+    return record ?? null;
+  }
+
+  if (!('$ref' in record)) {
+    return record;
+  }
+
+  const reference = record.$ref;
+  if (typeof reference !== 'string' || !reference || visited.has(reference)) {
+    return null;
+  }
+
+  const nextVisited = new Set(visited);
+  nextVisited.add(reference);
+  return resolveRecord(collection, reference, nextVisited);
+}
+
 export class I18nService extends EventTarget {
   #storageKey;
   #translationsUrl;
@@ -65,12 +132,10 @@ export class I18nService extends EventTarget {
   }
 
   async initialize() {
-    this.#messages = await fetchJson(this.#translationsUrl);
+    this.#messages = await loadMessages(this.#translationsUrl);
 
     const preferredLocale = globalThis.localStorage?.getItem(this.#storageKey)
-      || 'system'
-      || this.#messages.defaultLocale
-      || 'zh-Hans';
+      ?? 'system';
 
     this.setLocale(preferredLocale, { silent: true });
     return this;
@@ -122,7 +187,7 @@ export class I18nService extends EventTarget {
   }
 
   t(key, values = {}, fallback = '') {
-    const record = this.#messages?.ui?.[key];
+    const record = resolveRecord(this.#messages?.ui, key);
     const message = record?.[this.#resolvedLocale]
       ?? record?.[this.#messages?.defaultLocale ?? 'zh-Hans']
       ?? fallback
@@ -132,7 +197,7 @@ export class I18nService extends EventTarget {
   }
 
   label(id, values = {}, fallback = '') {
-    const record = this.#messages?.labels?.[id];
+    const record = resolveRecord(this.#messages?.labels, id);
     const message = record?.[this.#resolvedLocale]
       ?? record?.[this.#messages?.defaultLocale ?? 'zh-Hans']
       ?? fallback

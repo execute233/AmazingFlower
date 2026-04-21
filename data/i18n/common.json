@@ -1,0 +1,39 @@
+{
+  "ui": {
+    "app.brand": {
+      "zh-Hans": "哎呀花 - 云押花平台",
+      "zh-Hant": "哎呀花 - 雲押花平台",
+      "en": "AmazingFlower"
+    },
+    "locale.label": {
+      "zh-Hans": "语言",
+      "zh-Hant": "語言",
+      "en": "Language"
+    },
+    "locale.followSystem": {
+      "zh-Hans": "跟随系统（{language}）",
+      "zh-Hant": "跟隨系統（{language}）",
+      "en": "Follow system ({language})"
+    },
+    "nav.studio": {
+      "zh-Hans": "编辑台",
+      "zh-Hant": "編輯台",
+      "en": "Studio"
+    },
+    "nav.gallery": {
+      "zh-Hans": "作品展示",
+      "zh-Hant": "作品展示",
+      "en": "Gallery"
+    },
+    "nav.about": {
+      "zh-Hans": "关于我们",
+      "zh-Hant": "關於我們",
+      "en": "About"
+    },
+    "nav.contact": {
+      "zh-Hans": "联系方式",
+      "zh-Hant": "聯絡方式",
+      "en": "Contact"
+    }
+  }
+}

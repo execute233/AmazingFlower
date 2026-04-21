@@ -27,7 +27,13 @@ AmazingFlower/
 ├─ assets/                    # 图片素材（背景/花朵/叶片）
 ├─ data/
 │  ├─ catalog/                # 素材目录与分文件夹清单
-│  └─ i18n/translations.json  # 多语言文案与素材标签
+│  └─ i18n/
+│     ├─ index.json           # i18n 清单（默认语言、支持语言、资源文件列表）
+│     ├─ common.json          # 通用 UI 文案（品牌、导航、语言切换）
+│     ├─ studio.json          # 编辑台相关文案（状态、工具栏、图层）
+│     ├─ pages.json           # 静态页面文案
+│     ├─ catalog.json         # 背景 / 分组 / 文件夹标签
+│     └─ assets.json          # 具体素材名称
 ├─ script/
 │  ├─ index.js                # 编辑台入口
 │  ├─ editor/PressedFlowerStudio.js
@@ -66,7 +72,7 @@ npx serve . -p 8080
 ## 编辑台运行逻辑（`index.html` + `script/index.js`）
 
 1. 页面加载 `importmap`，引入 `konva` 与 `@app/*` 模块。
-2. 入口脚本初始化 `I18nService`，读取 `data/i18n/translations.json`，应用界面文案。
+2. 入口脚本初始化 `I18nService`，读取 `data/i18n/index.json`，再按清单合并多个翻译资源文件并应用界面文案。
 3. 创建 `AssetCatalog`（读取 `data/catalog/index.json`）和 `AssetLoader`（带缓存的图片加载器）。
 4. 初始化 `PressedFlowerStudio`：
    - 创建 Konva Stage / Layer / Group / Transformer；
@@ -130,11 +136,14 @@ npx serve . -p 8080
 1. 将图片放入 `assets/`。
 2. 在 `data/catalog/{folder-id}.json` 添加素材项。
 3. 在 `data/catalog/index.json` 中注册 folder 与 group 的关联关系。
-4. 在 `data/i18n/translations.json` 的 `labels` 下补齐素材 ID 的多语言名称。
+4. 在 `data/i18n/assets.json` 中补齐素材 ID 的多语言名称；若是背景、分组或文件夹标签，则更新 `data/i18n/catalog.json`。
 
 ### 新增界面文案
 
-1. 在 `translations.json` 的 `ui` 下添加键值。
+1. 按文案类型选择对应文件：
+   - 通用导航 / 语言切换：`data/i18n/common.json`
+   - 编辑台交互与状态：`data/i18n/studio.json`
+   - 静态页面内容：`data/i18n/pages.json`
 2. 在 HTML 或脚本渲染节点上使用 `data-i18n="your.key"`。
 
 ## 技术栈

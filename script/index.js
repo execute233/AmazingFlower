@@ -267,7 +267,7 @@ async function main() {
 
     // ==================== 2. 初始化国际化服务 ====================
     const i18n = new I18nService({
-        translationsUrl: new URL('../data/i18n/translations.json', import.meta.url).href,
+        translationsUrl: new URL('../data/i18n/index.json', import.meta.url).href,
     });
     await i18n.initialize();
 

@@ -2,7 +2,7 @@ import { I18nService, syncLocaleSelect } from '../i18n/I18nService.js';
 
 async function main() {
   const i18n = new I18nService({
-    translationsUrl: new URL('../../data/i18n/translations.json', import.meta.url).href,
+    translationsUrl: new URL('../../data/i18n/index.json', import.meta.url).href,
   });
 
   await i18n.initialize();

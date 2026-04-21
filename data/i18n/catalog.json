@@ -1,0 +1,25 @@
+{
+  "labels": {
+    "7f7ea5af-45c9-4b8c-a46b-d3c1dbf435a9": {
+      "zh-Hans": "押花工作台背景",
+      "zh-Hant": "押花工作台背景",
+      "en": "Workbench Background"
+    },
+    "d8805683-46c6-4326-a88e-96e84c0e7cd9": {
+      "zh-Hans": "花朵素材",
+      "zh-Hant": "花朵素材",
+      "en": "Flower Assets"
+    },
+    "5a24313c-9d76-4a2d-a9d1-80f6a94b3161": {
+      "zh-Hans": "叶片素材",
+      "zh-Hant": "葉片素材",
+      "en": "Foliage Assets"
+    },
+    "d7b0d77b-f0f3-4727-a66d-3ca3b8b7f3d8": {
+      "$ref": "d8805683-46c6-4326-a88e-96e84c0e7cd9"
+    },
+    "0be4d2de-0ebd-4711-a117-e829cb16b6df": {
+      "$ref": "5a24313c-9d76-4a2d-a9d1-80f6a94b3161"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "defaultLocale": "zh-Hans",
+  "supportedLocales": [
+    "zh-Hans",
+    "zh-Hant",
+    "en"
+  ],
+  "resources": [
+    "./common.json",
+    "./studio.json",
+    "./pages.json",
+    "./catalog.json",
+    "./assets.json"
+  ]
+}
